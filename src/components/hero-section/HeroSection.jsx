@@ -1,5 +1,4 @@
 
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 
@@ -14,7 +13,7 @@ export default function HeroSecion() {
                             Избери следващата си разходка
                         </h1>
                         <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
-                            Многобразие от различни пътеки и идеи за приключения сред природата в България и по света.
+                            Многообразие от различни пътеки и идеи за приключения сред природата в България и по света.
                         </p>
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <Link

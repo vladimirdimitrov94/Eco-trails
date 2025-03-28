@@ -14,26 +14,26 @@ import Footer from './components/footer/Footer'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0)
 
-  return (
-    <div> 
-      <NavBar />
+    return (
+        <div>
+            <NavBar />
 
-      <Routes>
-        <Route path='/' element={<HeroSection />}/>
-        <Route path='/login' element={<Login />}/>
-        <Route path='/register' element={<Register />}/>
-        <Route path='/trails' element={<Trails />}/>
-        <Route path='/trails/:trailId' element={<Details />}/>
-        <Route path='/add' element={<AddTrail />}/>
-        <Route path='/edit/:trailId' element={<EditTrail />}/>
-        <Route path='/*' element={<NotFound />}/>
-
-      </Routes>
-      <Footer />
-    </div>
-  )
+            <Routes>
+                <Route path='/' element={<HeroSection />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register />} />
+                <Route path='/trails' element={<Trails />} />
+                <Route path='trails/details/:trailId' element={<Details />} />
+                <Route path='edit/:trailId' element={<EditTrail />} />
+                <Route path='trails/add' element={<AddTrail />} />
+                <Route path='/*' element={<NotFound />} />
+            </Routes>
+            
+            <Footer />
+        </div>
+    )
 }
 
 export default App

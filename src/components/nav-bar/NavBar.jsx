@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 
 const navigation = [
     { name: 'Начало', href: '/', current: false },
     { name: 'Разходки', href: '/trails', current: false },
     { name: 'Моите разходки', href: '#', current: false },
-    { name: 'Добави', href: '/add', current: false },
+    { name: 'Добави', href: '/trails/add', current: false },
     { name: 'Вписване', href: '/login', current: false },
     { name: 'Регистрация', href: '/register', current: false },
     { name: 'Изход', href: '#', current: false },
@@ -15,6 +15,8 @@ function classNames(...classes) {
 }
 
 export default function NavBar() {
+
+    const location = useLocation();
     return (
         <div as="nav" className="bg-gray-800">
 
@@ -32,9 +34,8 @@ export default function NavBar() {
                                     <Link
                                         key={item.name}
                                         to={item.href}
-                                        aria-current={item.current ? 'page' : undefined}
                                         className={classNames(
-                                            item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                            location.pathname === item.href ? 'bg-gray-900 text-white border border-solid border-gray-400' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                             'rounded-md px-3 py-2 text-sm font-medium',
                                         )}
                                     >

@@ -1,6 +1,8 @@
 
-import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { getTrailById } from '../../servives/trails-data';
+
 
 
 export default function Details() {
@@ -11,12 +13,7 @@ export default function Details() {
 
     useEffect(() => {
         (async () => {
-            const response = await fetch(`http://localhost:3030/jsonstore/trails/${trailId}`);
-            const result = await response.json();
-
-            console.log(result);
-            
-
+            const result = await getTrailById(trailId);
             setTrail(result)
         })();
     }, [])
@@ -64,7 +61,7 @@ export default function Details() {
 
                             <div className="mt-10 flex items-center gap-x-2">
                                 <Link
-                                    to="trails"
+                                    to={`/edit/${trailId}`}
                                     className="rounded-md bg-lime-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-lime-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 >
                                     Редактирай

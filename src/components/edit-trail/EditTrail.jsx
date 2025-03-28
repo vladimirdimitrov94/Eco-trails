@@ -1,5 +1,21 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export default function EditTrail() {
+
+    const [trail, setTrail] = useState({});
+    const { trailId } = useParams();
+
+
+    useEffect(() => {
+        (async () => {
+            const response = await fetch(`http://localhost:3030/jsonstore/trails/${trailId}`);
+            const result = await response.json();
+
+            setTrail(result)
+        })();
+    }, [])
+
     return (
         <form className='pt-10 pb-10 pl-150 pr-150'>
             <div className="space-y-12">
@@ -13,6 +29,7 @@ export default function EditTrail() {
                             <div className="mt-2">
                                 <div className="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
                                     <input
+                                        value={trail.name}
                                         id="trailname"
                                         name="trailname"
                                         type="text"
@@ -30,6 +47,7 @@ export default function EditTrail() {
                             <div className="mt-2">
                                 <div className="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
                                     <input
+                                        value={trail.imageUrl}
                                         id="img"
                                         name="img"
                                         type="text"
@@ -51,6 +69,7 @@ export default function EditTrail() {
                             </label>
                             <div className="mt-2">
                                 <input
+                                    value={trail.location}
                                     id="location"
                                     name="location"
                                     type="text"
@@ -67,6 +86,7 @@ export default function EditTrail() {
                             </label>
                             <div className="mt-2">
                                 <input
+                                    value={trail.length}
                                     id="length"
                                     name="length"
                                     type="number"
@@ -83,6 +103,7 @@ export default function EditTrail() {
                             </label>
                             <div className="mt-2">
                                 <input
+                                    value={trail.difficulty}
                                     id="difficulty"
                                     name="difficulty"
                                     type="number"
@@ -100,6 +121,7 @@ export default function EditTrail() {
                             </label>
                             <div className="mt-2">
                                 <textarea
+                                    value={trail.details}
                                     name='about'
                                     placeholder='Разкажи повече подробности'
                                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -114,7 +136,7 @@ export default function EditTrail() {
 
             <div className="mt-6 flex items-center justify-end gap-x-6">
                 <button type="button" className="text-sm/6 font-semibold text-gray-900">
-                    Cancel
+                    Откажи
                 </button>
                 <button
                     type="submit"
