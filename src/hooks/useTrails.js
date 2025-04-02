@@ -35,7 +35,9 @@ export function useGetOneTrail(id) {
 export function useAddTrail() {
 
     async function trailCreateHandler(trailData){
-        await trailsData.addTrail(trailData)
+        const result = await trailsData.addTrail(trailData)
+
+        return result
     }
 
     return trailCreateHandler;

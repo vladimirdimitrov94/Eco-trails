@@ -10,6 +10,7 @@ export function useLogin() {
     async function loginHandler(email, password) {
         const result = await login(email, password);
         changeAuthState(result);
+
     }
 
     return loginHandler;
@@ -22,6 +23,8 @@ export function useRegister() {
     async function registerHandler(email, password, username) {
         const {password:_, ...result} = await register(email, password, username);
         changeAuthState(result);
+
+
     }
 
     return registerHandler;

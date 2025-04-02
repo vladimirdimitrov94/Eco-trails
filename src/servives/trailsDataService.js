@@ -15,7 +15,8 @@ async function getTrailById(id) {
 }
 
 async function addTrail(trailData) {
-    await request.post(BASE_URL, trailData)
+    const result = await request.post(BASE_URL, trailData);    
+    return result
 }
 
 const trailsData = {
