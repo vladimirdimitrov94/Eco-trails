@@ -11,7 +11,7 @@ export function useForm(initialValues, sumbitCallback) {
         }));
     }
 
-    function sumbitHandler(e) {
+    function submitHandler(e) {
         e.preventDefault();
 
         sumbitCallback(values);
@@ -20,6 +20,6 @@ export function useForm(initialValues, sumbitCallback) {
     return {
         values,
         changeHandler,
-        sumbitHandler
+        submitHandler
     }
 }

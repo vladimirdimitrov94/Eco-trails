@@ -1,20 +1,22 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from '../../hooks/useForm';
 import { useLogin } from "../../hooks/useAuth";
+import { useState } from "react";
 
 export default function Login() {
 
+    const [error, setError] = useState('')
     const login = useLogin();
     const navigate = useNavigate();
 
-    const { values, changeHandler, sumbitHandler } = useForm(
+    const { values, changeHandler, submitHandler } = useForm(
         { email: '', password: '' },
         async ({ email, password }) => {
             try {
                 await login(email, password);
                 navigate('/trails')
             } catch (err) {
-                console.log(err.message);
+                setError(err.message)
             }
         });
 
@@ -28,7 +30,7 @@ export default function Login() {
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form onSubmit={sumbitHandler} className="space-y-6">
+                <form onSubmit={submitHandler} className="space-y-6">
                     <div>
                         <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
                             Имейл
@@ -63,6 +65,14 @@ export default function Login() {
                             />
                         </div>
                     </div>
+
+                    {error && (
+                        <p style={{ color: 'red' }}>
+                            {error}
+                        </p>
+                    )
+
+                    }
 
                     <div>
                         <button

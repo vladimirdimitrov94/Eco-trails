@@ -10,10 +10,10 @@ export async function login(email, password) {
 
 }
 
-export async function register(email, password) {
+export async function register(email, password, username) {
 
     const body = { email, password }
-    const authData = await request.post(`${BASE_URL}/register`, { email, password });
+    const authData = await request.post(`${BASE_URL}/register`, { email, password, username });
 
     return authData;
 }

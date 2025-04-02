@@ -1,23 +1,31 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { useRegister } from "../../hooks/useAuth"
+import { useState } from "react";
 
 export default function Register() {
 
+    const [error, setError] = useState('')
     const register = useRegister();
     const navigate = useNavigate();
 
 
-    const { values, changeHandler, sumbitHandler } = useForm(
+    const { values, changeHandler, submitHandler } = useForm(
         { email: '', password: '', username: '', rePassword: '' },
-        async ({ email, password }) => {
-            console.log({ email, password });
+        async ({ email, password, username, rePassword }) => {
+
+            if (password !== rePassword) {
+                setError('Passwords do not match')
+
+                return
+            }
 
             try {
-                await register(email, password);
+                await register(email, password, username);
                 navigate('/trails')
+
             } catch (err) {
-                console.log(err);
+                setError(err.message)
             }
         });
 
@@ -30,7 +38,7 @@ export default function Register() {
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form onSubmit={sumbitHandler} className="space-y-6">
+                <form onSubmit={submitHandler} className="space-y-6">
                     <div>
                         <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
                             Имейл
@@ -102,6 +110,14 @@ export default function Register() {
                             />
                         </div>
                     </div>
+
+                    {error && (
+                        <p style={{ color: 'red' }}>
+                            {error}
+                        </p>
+                    )
+
+                    }
 
                     <div>
                         <button
