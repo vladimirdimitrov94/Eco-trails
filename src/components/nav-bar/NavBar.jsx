@@ -1,13 +1,20 @@
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { useContext } from 'react';
+import { Link, useLocation } from 'react-router-dom'
+import { AuthContext } from '../../contexts/authContext';
 
-const navigation = [
+const userNavigation = [
     { name: 'Начало', href: '/', current: false },
     { name: 'Разходки', href: '/trails', current: false },
-    { name: 'Моите разходки', href: '#', current: false },
+    { name: 'Моите разходки', href: '/my-trails', current: false },
     { name: 'Добави', href: '/trails/add', current: false },
+    { name: 'Изход', href: '#', current: false },
+]
+
+const guestNavigation = [
+    { name: 'Начало', href: '/', current: false },
+    { name: 'Разходки', href: '/trails', current: false },
     { name: 'Вписване', href: '/login', current: false },
     { name: 'Регистрация', href: '/register', current: false },
-    { name: 'Изход', href: '#', current: false },
 ]
 
 function classNames(...classes) {
@@ -15,6 +22,8 @@ function classNames(...classes) {
 }
 
 export default function NavBar() {
+
+    const { isAuthenticated, username } = useContext(AuthContext)
 
     const location = useLocation();
     return (
@@ -24,26 +33,48 @@ export default function NavBar() {
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                            <div className='text-white' >
-                                Здравей, user!
+                            {isAuthenticated && <div className='text-white' >
+                                Здравей, {username}!
                             </div>
+                            }
                         </div>
-                        <div className="hidden sm:ml-6 sm:block ustify-end">
-                            <div className="flex space-x-4">
-                                {navigation.map((item) => (
-                                    <Link
-                                        key={item.name}
-                                        to={item.href}
-                                        className={classNames(
-                                            location.pathname === item.href ? 'bg-gray-900 text-white border border-solid border-gray-400' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                            'rounded-md px-3 py-2 text-sm font-medium',
-                                        )}
-                                    >
-                                        {item.name}
-                                    </Link>
-                                ))}
+
+                            {isAuthenticated 
+
+                                ?                         <div className="hidden sm:ml-6 sm:block ustify-end">
+                                <div className="flex space-x-4">
+                                    {userNavigation.map((item) => (
+                                        <Link
+                                            key={item.name}
+                                            to={item.href}
+                                            className={classNames(
+                                                location.pathname === item.href ? 'bg-gray-900 text-white border border-solid border-gray-400' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                'rounded-md px-3 py-2 text-sm font-medium',
+                                            )}
+                                        >
+                                            {item.name}
+                                        </Link>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
+                                : 
+                                <div className="hidden sm:ml-6 sm:block ustify-end">
+                                <div className="flex space-x-4">
+                                    {guestNavigation.map((item) => (
+                                        <Link
+                                            key={item.name}
+                                            to={item.href}
+                                            className={classNames(
+                                                location.pathname === item.href ? 'bg-gray-900 text-white border border-solid border-gray-400' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                'rounded-md px-3 py-2 text-sm font-medium',
+                                            )}
+                                        >
+                                            {item.name}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                            }
                     </div>
 
                 </div>
