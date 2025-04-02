@@ -7,7 +7,7 @@ import { AuthContext } from '../../contexts/authContext';
 
 export default function Details() {
 
-    const {id, } = useContext(AuthContext)
+    const { id } = useContext(AuthContext)
     const { trailId } = useParams();
     const [trail] = useGetOneTrail(trailId)
 
@@ -46,8 +46,9 @@ export default function Details() {
                                 <p className="text-base text-gray-900">{trail.details}</p>
                             </div>
 
-                            <div className="mt-10 flex items-center gap-x-2">
-                                <Link
+                            {trail.ownerID === id
+                                ? <div className="mt-10 flex items-center gap-x-2">
+                                                                    <Link
                                     to={`/edit/${trailId}`}
                                     className="rounded-md bg-lime-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-lime-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 >
@@ -56,10 +57,15 @@ export default function Details() {
                                 <Link to='#' className="rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                     Изтрий
                                 </Link>
+                                </div>
+                                :
+                                <div className="mt-10 flex items-center gap-x-2">
+
                                 <Link to="#" className="rounded-md bg-rose-300 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-rose-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                     Харесай
                                 </Link>
                             </div>
+                            }
                         </div>
                     </div>
                 </div>

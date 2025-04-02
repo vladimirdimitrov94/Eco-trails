@@ -1,6 +1,6 @@
 import * as request from './requesterService';
 
-const BASE_URL = 'http://localhost:3030/jsonstore/trails'
+const BASE_URL = 'http://localhost:3030/data/trails'
 
 async function getAll() {
 
@@ -8,15 +8,20 @@ async function getAll() {
     return result
 }
 
- async function getTrailById(id) {
+async function getTrailById(id) {
 
     const result = await request.get(BASE_URL + `/${id}`);
     return result
 }
 
+async function addTrail(trailData) {
+    await request.post(BASE_URL, trailData)
+}
+
 const trailsData = {
     getAll,
-    getTrailById
+    getTrailById,
+    addTrail
 }
 
 export default trailsData

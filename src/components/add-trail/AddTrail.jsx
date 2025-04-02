@@ -1,16 +1,54 @@
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
-import { ChevronDownIcon } from '@heroicons/react/16/solid'
+import { useContext } from "react"
+import { useForm } from "../../hooks/useForm"
+import { AuthContext } from "../../contexts/authContext"
+import { useAddTrail } from "../../hooks/useTrails"
+import { useNavigate } from "react-router-dom"
+
+const initialValues = {
+    trailname: '',
+    img: '',
+    location: '',
+    length: '',
+    difficulty: '',
+    about: ''
+
+}
 
 export default function AddTail() {
+
+    const navigate = useNavigate()
+    const { id } = useContext(AuthContext)
+    const trailCreateHandler = useAddTrail()
+    const ownerId = id
+
+    function addHandler(values, id) {
+
+        try {
+            const {_id} = trailCreateHandler({ ...values, ownerID: ownerId })
+            navigate(`/trails/details/${id}`)
+        } catch (error) {
+            console.log(error.message);
+            
+        }
+    }
+
+    const {
+        values,
+        changeHandler,
+        submitHandler
+    } = useForm(initialValues, addHandler)
+
+
+
     return (
-        <form className='pt-10 pb-10 pl-150 pr-150'>
+        <form onSubmit={submitHandler} className='pt-10 pb-10 pl-150 pr-150'>
             <div className="space-y-12">
                 <div className="border-b border-gray-900/10 ">
 
                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div className="sm:col-span-4">
                             <label htmlFor="trailname" className="block text-sm/6 font-medium text-gray-900">
-                                Име 
+                                Име
                             </label>
                             <div className="mt-2">
                                 <div className="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
@@ -18,6 +56,8 @@ export default function AddTail() {
                                         id="trailname"
                                         name="trailname"
                                         type="text"
+                                        value={values.trailname}
+                                        onChange={changeHandler}
                                         className="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
                                     />
                                 </div>
@@ -35,6 +75,8 @@ export default function AddTail() {
                                         id="img"
                                         name="img"
                                         type="text"
+                                        value={values.img}
+                                        onChange={changeHandler}
                                         placeholder="Image URL"
                                         className="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
                                     />
@@ -49,14 +91,16 @@ export default function AddTail() {
                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div className="sm:col-span-3">
                             <label htmlFor="location" className="block text-sm/6 font-medium text-gray-900">
-                                Локацаия
+                                Локация
                             </label>
                             <div className="mt-2">
                                 <input
                                     id="location"
                                     name="location"
                                     type="text"
-                                    autoComplete="Location"
+                                    autoComplete="location"
+                                    value={values.location}
+                                    onChange={changeHandler}
                                     placeholder='Къде се намира?'
                                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                                 />
@@ -73,6 +117,8 @@ export default function AddTail() {
                                     name="length"
                                     type="number"
                                     autoComplete="length"
+                                    value={values.length}
+                                    onChange={changeHandler}
                                     placeholder='Колко часа отнема?'
                                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                                 />
@@ -89,6 +135,8 @@ export default function AddTail() {
                                     name="difficulty"
                                     type="number"
                                     autoComplete="difficulty"
+                                    value={values.difficulty}
+                                    onChange={changeHandler}
                                     placeholder='Колко е трудно от 1-10?'
                                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                                 />
@@ -103,6 +151,8 @@ export default function AddTail() {
                             <div className="mt-2">
                                 <textarea
                                     name='about'
+                                    value={values.about}
+                                    onChange={changeHandler}
                                     placeholder='Разкажи повече подробности'
                                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                                 >

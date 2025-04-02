@@ -31,3 +31,13 @@ export function useGetOneTrail(id) {
 
     return [trail, setTrail];
 }
+
+export function useAddTrail() {
+
+    async function trailCreateHandler(trailData){
+        await trailsData.addTrail(trailData)
+    }
+
+    return trailCreateHandler;
+
+}
