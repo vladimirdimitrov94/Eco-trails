@@ -11,28 +11,44 @@ import NotFound from './components/not-found/NotFound'
 import Trails from './components/trails/Trails'
 import Details from './components/trail-details/TrailDetails'
 import Footer from './components/footer/Footer'
+import { AuthContext } from './contexts/authContext'
 
 
 function App() {
-    const [count, setCount] = useState(0)
+    const [authState, setAuthState] = useState({});
+
+    const changeAuthState = (state) => {
+        setAuthState(state)
+    }
+
+    const contexData = {
+        id: authState._id,
+        accessToken: authState.accessToken,
+        username: authState.username,
+        email: authState.email,
+        isAuthenticated: !!authState.email,
+        changeAuthState
+    }
 
     return (
-        <div>
-            <NavBar />
+        <AuthContext.Provider value={contexData}>
+            <div>
+                <NavBar />
 
-            <Routes>
-                <Route path='/' element={<HeroSection />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/register' element={<Register />} />
-                <Route path='/trails' element={<Trails />} />
-                <Route path='trails/details/:trailId' element={<Details />} />
-                <Route path='edit/:trailId' element={<EditTrail />} />
-                <Route path='trails/add' element={<AddTrail />} />
-                <Route path='/*' element={<NotFound />} />
-            </Routes>
-            
-            <Footer />
-        </div>
+                <Routes>
+                    <Route path='/' element={<HeroSection />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/register' element={<Register />} />
+                    <Route path='/trails' element={<Trails />} />
+                    <Route path='/trails/details/:trailId' element={<Details />} />
+                    <Route path='edit/:trailId' element={<EditTrail />} />
+                    <Route path='trails/add' element={<AddTrail />} />
+                    <Route path='/*' element={<NotFound />} />
+                </Routes>
+
+                <Footer />
+            </div>
+        </AuthContext.Provider>
     )
 }
 

@@ -1,25 +1,12 @@
-
-import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getTrailById } from '../../servives/trails-data';
+import { useGetOneTrail } from '../../hooks/useTrails';
 
 
 
 export default function Details() {
 
-    const [trail, setTrail] = useState({});
     const { trailId } = useParams();
-
-
-    useEffect(() => {
-        (async () => {
-            const result = await getTrailById(trailId);
-            setTrail(result)
-        })();
-    }, [])
-
-
-
+    const [trail] = useGetOneTrail(trailId)
 
     return (
         <div className="bg-white">

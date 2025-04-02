@@ -1,15 +1,22 @@
-import * as request from '../servives/requester';
+import * as request from './requesterService';
 
 const BASE_URL = 'http://localhost:3030/jsonstore/trails'
 
-export async function getAll() {
+async function getAll() {
 
     const result = await request.get(BASE_URL);
     return result
 }
 
-export async function getTrailById(id) {
+ async function getTrailById(id) {
 
     const result = await request.get(BASE_URL + `/${id}`);
     return result
 }
+
+const trailsData = {
+    getAll,
+    getTrailById
+}
+
+export default trailsData

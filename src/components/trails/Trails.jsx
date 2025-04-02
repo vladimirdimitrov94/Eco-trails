@@ -1,22 +1,12 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Paginator from '../paginator/Pagiantor'
-import * as request from "../../servives/requester";
-import { getAll } from "../../servives/trails-data";
-
+import { useGetAllTrails, useGetOneTrail } from "../../hooks/useTrails";
 
 
 
 export default function Trails() {
 
-    const [trails, setTrails] = useState([]);
-
-    useEffect (() => {
-        (async () => {
-            const result = await getAll();
-            setTrails((Object.values(result)));
-        })();
-    },[])
+    const [trails] = useGetAllTrails();
 
     return (
         <div className="bg-white">
@@ -34,7 +24,7 @@ export default function Trails() {
                         </Link>
                     ))}
                 </div>
-            <Paginator />
+                <Paginator />
             </div>
         </div>
     )
