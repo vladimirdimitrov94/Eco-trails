@@ -5,7 +5,6 @@ export default function usePersistedState(key, initialState) {
         const persistedAuth = localStorage.getItem(key);
 
         if (!persistedAuth) {
-            localStorage.clear()
             return initialState
         };
 
