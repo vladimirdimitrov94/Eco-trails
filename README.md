@@ -27,10 +27,9 @@
 
 🗂 Project Structure
 
-    src/
-├── components/       // Reusable UI components
-├── hooks/            // Custom React hooks: useForm, useAuth, etc.
-├── contexts/         // React Context for authentication state
-├── services/         // API service handlers
-├── App.jsx           // Main application component
-└── main.jsx          // Entry point
+	├── components/       // Reusable UI components
+	├── hooks/            // Custom React hooks: useForm, useAuth, etc.
+	├── contexts/         // React Context for authentication state
+	├── services/         // API service handlers
+	├── App.jsx           // Main application component
+	└── main.jsx          // Entry point
