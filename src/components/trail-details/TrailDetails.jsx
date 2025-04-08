@@ -1,6 +1,9 @@
-import { Link, useParams } from 'react-router-dom';
+import { useState } from 'react';
+
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useGetOneTrail } from '../../hooks/useTrails';
 import { useAuthContext } from '../../contexts/AuthContext';
+import trailsData from '../../servives/trailsDataService';
 
 
 
@@ -9,6 +12,20 @@ export default function Details() {
     const { id, isAuthenticated } = useAuthContext()
     const { trailId } = useParams();
     const [trail] = useGetOneTrail(trailId)
+    const navigate = useNavigate();
+
+    const [showModal, setShowModal] = useState(false);
+
+
+    const handleDelete = async () => {
+        try {
+            await trailsData.deleteTrail(trailId);
+            navigate('/trails'); 
+        } catch (err) {
+            console.log(err.message);
+            
+        }
+    };
 
     return (
         <div className="bg-white">
@@ -54,9 +71,9 @@ export default function Details() {
                                     >
                                         Редактирай
                                     </Link>
-                                    <Link to='#' className="rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                    <button onClick={() => setShowModal(true)} className="rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                         Изтрий
-                                    </Link>
+                                    </button>
                                 </div>
                             }
                             {isAuthenticated && trail._ownerId !== id &&
@@ -68,6 +85,29 @@ export default function Details() {
                                 </div>
                             }
                         </div>
+
+                        {showModal && (
+                            <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm">
+                                <div className="border-2 border-solid bg-white p-6 rounded-xl shadow-xl transform transition-all scale-100 animate-fadeIn">
+                                    <p className="mb-4 text-lg font-medium">Сигурен ли си, че искаш да изтриеш тази пътека?</p>
+                                    <div className="flex justify-center gap-4">
+                                        <button
+                                            onClick={handleDelete}
+                                            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+                                        >
+                                            Да, изтрий
+                                        </button>
+                                        <button
+                                            onClick={() => setShowModal(false)}
+                                            className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300 transition"
+                                        >
+                                            Отказ
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
                     </div>
                 </div>
             </div>

@@ -19,10 +19,20 @@ async function addTrail(trailData) {
     return result
 }
 
+ async function deleteTrail(id) {
+    await request.del(`http://localhost:3030/data/trails/${id}`);
+}
+
+async function editTrail(id, trailData){
+    await request.put(`http://localhost:3030/data/trails/${id}`, trailData);
+}
+
 const trailsData = {
     getAll,
     getTrailById,
-    addTrail
+    addTrail,
+    deleteTrail,
+    editTrail
 }
 
 export default trailsData

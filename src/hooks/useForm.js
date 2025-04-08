@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useForm(initialValues, sumbitCallback) {
     const [values, setValues] = useState(initialValues);
+
+    useEffect(() => {
+        setValues(initialValues);
+    }, []);
 
     const changeHandler = (e) => {
         
