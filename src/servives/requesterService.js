@@ -1,8 +1,8 @@
 async function requester(method, url, data) {
 
-    const options = {}
+    const options = {};
 
-    const accessToken = localStorage.getItem('auth')
+    const accessToken = localStorage.getItem('accessToken');
 
     if(accessToken) {
         options.headers = {
@@ -25,6 +25,12 @@ async function requester(method, url, data) {
     }
 
     const response = await fetch(url, options);
+    if(response.status === 204){
+        return;
+    };
+    if (response.status === 403) {
+        return;
+    }
     const result = await response.json();
 
     if (!response.ok) {

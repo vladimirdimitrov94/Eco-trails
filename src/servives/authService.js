@@ -17,3 +17,8 @@ export async function register(email, password, username) {
 
     return authData;
 }
+
+export async function logout() {
+
+    request.get(`${BASE_URL}/logout`);
+}

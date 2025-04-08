@@ -9,7 +9,7 @@ export default function EditTrail() {
 
     useEffect(() => {
         (async () => {
-            const response = await fetch(`http://localhost:3030/jsonstore/trails/${trailId}`);
+            const response = await fetch(`http://localhost:3030/data/trails/${trailId}`);
             const result = await response.json();
 
             setTrail(result)

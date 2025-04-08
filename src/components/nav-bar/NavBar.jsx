@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom'
-import { AuthContext } from '../../contexts/authContext';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const userNavigation = [
     { name: 'Начало', href: '/', current: false },
     { name: 'Разходки', href: '/trails', current: false },
     { name: 'Моите разходки', href: '/my-trails', current: false },
     { name: 'Добави', href: '/trails/add', current: false },
-    { name: 'Изход', href: '#', current: false },
+    { name: 'Изход', href: '/logout', current: false },
 ]
 
 const guestNavigation = [
@@ -23,7 +23,7 @@ function classNames(...classes) {
 
 export default function NavBar() {
 
-    const { isAuthenticated, username } = useContext(AuthContext)
+    const { isAuthenticated, username } = useAuthContext()
 
     const location = useLocation();
     return (
@@ -39,9 +39,9 @@ export default function NavBar() {
                             }
                         </div>
 
-                            {isAuthenticated 
+                        {isAuthenticated
 
-                                ?                         <div className="hidden sm:ml-6 sm:block ustify-end">
+                            ? <div className="hidden sm:ml-6 sm:block ustify-end">
                                 <div className="flex space-x-4">
                                     {userNavigation.map((item) => (
                                         <Link
@@ -57,8 +57,8 @@ export default function NavBar() {
                                     ))}
                                 </div>
                             </div>
-                                : 
-                                <div className="hidden sm:ml-6 sm:block ustify-end">
+                            :
+                            <div className="hidden sm:ml-6 sm:block ustify-end">
                                 <div className="flex space-x-4">
                                     {guestNavigation.map((item) => (
                                         <Link
@@ -74,7 +74,7 @@ export default function NavBar() {
                                     ))}
                                 </div>
                             </div>
-                            }
+                        }
                     </div>
 
                 </div>

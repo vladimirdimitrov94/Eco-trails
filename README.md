@@ -1,12 +1,36 @@
-# React + Vite
+# Eco Trails 🌿
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Eco Trails** is a web application built with **React** and **Vite**, designed to help nature enthusiasts explore, share, and review hiking and eco-tourism trails across Bulgaria and the world. The platform encourages environmentally-friendly travel and community collaboration.
 
-Currently, two official plugins are available:
+## 🔧 Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 18+
+- Vite
+- React Router
+- Tailwind CSS
+- REST API Communication
+- Local Backend Server (`http://localhost:3030`)
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
+1.	Install dependencies:
+    - npm install
+2. 	Start the development server:
+    - npm run dev
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🧭 Features
+	•	🔐 User Registration & Login
+	•	📍 Browse all available trails
+	•	➕ Create new trail entries
+	•	✏️ Edit & delete your own trails
+	•	❤️ Like and comment on trails
+	•	🔎 Filter trails by category or difficulty
+
+🗂 Project Structure
+
+    src/
+├── components/       // Reusable UI components
+├── hooks/            // Custom React hooks: useForm, useAuth, etc.
+├── contexts/         // React Context for authentication state
+├── services/         // API service handlers
+├── App.jsx           // Main application component
+└── main.jsx          // Entry point

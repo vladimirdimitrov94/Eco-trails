@@ -1,6 +1,5 @@
 import { useContext } from "react"
 import { useForm } from "../../hooks/useForm"
-import { AuthContext } from "../../contexts/authContext"
 import { useAddTrail } from "../../hooks/useTrails"
 import { useNavigate } from "react-router-dom"
 
@@ -10,26 +9,24 @@ const initialValues = {
     location: '',
     length: '',
     difficulty: '',
-    details: ''
+    details: '',
+    likes: []
 
 }
 
 export default function AddTail() {
 
-    const navigate = useNavigate()
-    const { id } = useContext(AuthContext)
-    const trailCreateHandler = useAddTrail()
-    const ownerId = id
+    const navigate = useNavigate();
+    const trailCreateHandler = useAddTrail();
 
     async function addHandler(values) {
 
         try {
-            const {_id} = await trailCreateHandler({ ...values, ownerID: ownerId })
+            const {_id} = await trailCreateHandler(values);
             
-            navigate(`/trails/details/${_id}`)
+            navigate(`/trails/details/${_id}`);
         } catch (error) {
             console.log(error.message);
-            
         }
     }
 
@@ -37,7 +34,7 @@ export default function AddTail() {
         values,
         changeHandler,
         submitHandler
-    } = useForm(initialValues, addHandler)
+    } = useForm(initialValues, addHandler);
 
 
 
