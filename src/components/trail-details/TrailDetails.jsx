@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useGetOneTrail } from '../../hooks/useTrails';
 import { useAuthContext } from '../../contexts/AuthContext';
+
 import trailsData from '../../servives/trailsDataService';
+import { useLike } from '../../hooks/useLike';
 
 
 
@@ -16,14 +18,15 @@ export default function Details() {
 
     const [showModal, setShowModal] = useState(false);
 
+    const { like, hasLiked, likesCount } = useLike(trailId, id);
 
     const handleDelete = async () => {
         try {
             await trailsData.deleteTrail(trailId);
-            navigate('/trails'); 
+            navigate('/trails');
         } catch (err) {
             console.log(err.message);
-            
+
         }
     };
 
@@ -39,9 +42,17 @@ export default function Details() {
                 </div>
 
                 <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto_auto_1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
+
                     <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
                         <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{trail.name}</h1>
                     </div>
+
+
+                    <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+                        <h1 className="tracking-tight text-gray-800 ">{trail.location}</h1>
+                    </div>
+
+
 
                     <div className="mt-4 lg:row-span-3 lg:mt-0">
                         <h2>Продължителност</h2>
@@ -52,7 +63,7 @@ export default function Details() {
                         </div>
                         <div className="mt-6 lg:row-span-3 lg:mt-0">
                             <h2>Харесвания</h2>
-                            <p className="text-3xl tracking-tight text-gray-900 ">{trail.likes?.length} </p>
+                            <p className="text-3xl tracking-tight text-gray-900 ">{likesCount}</p>
                         </div>
                     </div>
                     <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pr-8 lg:pb-16">
@@ -79,9 +90,15 @@ export default function Details() {
                             {isAuthenticated && trail._ownerId !== id &&
                                 <div className="mt-10 flex items-center gap-x-2">
 
-                                    <Link to="#" className="rounded-md bg-rose-300 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-rose-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                        Харесай
-                                    </Link>
+                                    <button
+                                        onClick={like}
+                                        disabled={hasLiked}
+                                        className={`rounded-md ${hasLiked ? 'bg-gray-300' : 'bg-rose-300 hover:bg-rose-200'
+                                            } px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs transition`}
+                                    >
+                                        {hasLiked ? 'Харесано' : 'Харесай'}
+
+                                    </button>
                                 </div>
                             }
                         </div>

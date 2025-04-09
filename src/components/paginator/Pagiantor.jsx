@@ -1,12 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 
-const items = [
-  { id: 1, title: 'Back End Developer', department: 'Engineering', type: 'Full-time', location: 'Remote' },
-  { id: 2, title: 'Front End Developer', department: 'Engineering', type: 'Full-time', location: 'Remote' },
-  { id: 3, title: 'User Interface Designer', department: 'Design', type: 'Full-time', location: 'Remote' },
-]
 
-export default function Pagi() {
+export default function Paginator() {
   return (
     <div className="flex items-center justify-between bg-white px-4 py-3 sm:px-0">
       <div className="flex flex-1 justify-between sm:hidden">
@@ -26,8 +21,8 @@ export default function Pagi() {
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
-            Показва <span className="font-medium">1</span> до <span className="font-medium">8</span> от{' '}
-            <span className="font-medium">97</span> резултата
+            Показва <span className="font-medium">1</span> до <span className="font-medium">6</span> от{' '}
+            <span className="font-medium">6</span> резултата
           </p>
         </div>
         <div>

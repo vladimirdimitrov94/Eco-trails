@@ -15,7 +15,7 @@ export function useGetAllTrails() {
     }, [])
 
     return [trails, setTrails];
-}
+};
 
 export function useGetOneTrail(id) {
 
@@ -24,22 +24,22 @@ export function useGetOneTrail(id) {
 
     useEffect(() => {
         (async () => {
-            const result = await trailsData.getTrailById(id);            
+            const result = await trailsData.getTrailById(id);
             setTrail((result));
         })();
     }, [id])
 
     return [trail, setTrail];
-}
+};
 
 export function useAddTrail() {
 
-    async function trailCreateHandler(trailData){
-        const result = await trailsData.addTrail(trailData)
+    async function trailCreateHandler(trailData) {
+        const result = await trailsData.addTrail(trailData);
 
         return result
     }
 
     return trailCreateHandler;
 
-}
+};
