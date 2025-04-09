@@ -104,8 +104,8 @@ export default function Details() {
                         </div>
 
                         {showModal && (
-                            <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm">
-                                <div className="border-2 border-solid bg-white p-6 rounded-xl shadow-xl transform transition-all scale-100 animate-fadeIn">
+                            <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-xs">
+                                <div className="bg-white/100 backdrop-blur-md border border-gray-400 p-6 rounded-2xl shadow-2xl transform transition-all scale-100 animate-fadeIn">
                                     <p className="mb-4 text-lg font-medium">Сигурен ли си, че искаш да изтриеш тази пътека?</p>
                                     <div className="flex justify-center gap-4">
                                         <button

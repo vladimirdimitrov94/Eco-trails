@@ -32,6 +32,22 @@ export function useGetOneTrail(id) {
     return [trail, setTrail];
 };
 
+export function useGetUserTrails(userId) {
+
+
+    const [trails, setTrails] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            const result = await trailsData.getUserTrails(userId);
+            setTrails((Object.values(result)));
+        })();
+    }, [])
+
+    return [trails, setTrails];
+};
+
+
 export function useAddTrail() {
 
     async function trailCreateHandler(trailData) {

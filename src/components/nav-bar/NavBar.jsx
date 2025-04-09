@@ -5,7 +5,7 @@ import { useAuthContext } from '../../contexts/AuthContext';
 const userNavigation = [
     { name: 'Начало', href: '/', current: false },
     { name: 'Разходки', href: '/trails', current: false },
-    { name: 'Моите разходки', href: '/my-trails', current: false },
+    { name: 'Моите разходки', href: '/mytrails', current: false },
     { name: 'Добави', href: '/trails/add', current: false },
     { name: 'Изход', href: '/logout', current: false },
 ]
@@ -34,7 +34,7 @@ export default function NavBar() {
                     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                             {isAuthenticated && <div className='text-white' >
-                                Здравей, {username}!
+                                <p className='bg-gray-900 text-white border border-solid border-gray-400 rounded-md px-3 py-2 text-sm font-medium'>Здравей, <Link to="/profile">{username}</Link>!</p>
                             </div>
                             }
                         </div>

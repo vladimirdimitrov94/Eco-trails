@@ -3,7 +3,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 
 export default function Paginator() {
   return (
-    <div className="flex items-center justify-between bg-white px-4 py-3 sm:px-0">
+    <div className="flex items-center fixed bottom-15 right-100 justify-between bg-white px-4 py-3 sm:px-0">
       <div className="flex flex-1 justify-between sm:hidden">
         <a
           href="#"
@@ -20,7 +20,7 @@ export default function Paginator() {
       </div>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-gray-700 fixed left-104">
             Показва <span className="font-medium">1</span> до <span className="font-medium">6</span> от{' '}
             <span className="font-medium">6</span> резултата
           </p>

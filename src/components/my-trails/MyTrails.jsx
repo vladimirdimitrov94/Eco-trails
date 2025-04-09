@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
+import { useGetUserTrails } from "../../hooks/useTrails";
+import { getUserProfile } from "../../utils/authUtils";
+
 import Paginator from '../paginator/Pagiantor'
-import { useGetAllTrails } from "../../hooks/useTrails";
 
 
+export default function MyTrails() {
 
-export default function Trails() {
+    const authData = getUserProfile();
+    const userId = authData._id
 
-    const [trails] = useGetAllTrails();
+    const [trails] = useGetUserTrails(userId);
 
+    
     return (
         <div className="bg-white">
             <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-6 lg:max-w-6xl lg:px-8">
