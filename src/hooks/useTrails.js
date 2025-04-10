@@ -59,3 +59,43 @@ export function useAddTrail() {
     return trailCreateHandler;
 
 };
+
+export function usePaginatedTrails(pageIndex, pageSize = 8) {
+	const [trails, setTrails] = useState([]);
+	const [totalCount, setTotalCount] = useState(0);
+	const offset = pageIndex * pageSize;
+
+	useEffect(() => {
+		async function fetchData() {
+			const [paginated, total] = await Promise.all([
+				trailsData.getTrailsPaginated(offset, pageSize),
+				trailsData.getTrailsCount()
+			]);
+			setTrails(paginated);
+			setTotalCount(total);
+		}
+		fetchData();
+	}, [pageIndex, pageSize]);
+
+	return { trails, totalCount };
+}
+
+export function usePaginatedMyTrails(pageIndex, userId, pageSize = 8) {
+	const [trails, setTrails] = useState([]);
+	const [totalCount, setTotalCount] = useState(0);
+	const offset = pageIndex * pageSize;
+
+	useEffect(() => {
+		async function fetchData() {
+			const [paginated, total] = await Promise.all([
+				trailsData.getMyTrailsPaginated(offset, userId, pageSize),
+				trailsData.getMyTrailsCount(userId)
+			]);
+			setTrails(paginated);
+			setTotalCount(total);
+		}
+		fetchData();
+	}, [pageIndex, pageSize]);
+
+	return { trails, totalCount };
+}

@@ -15,8 +15,7 @@ export function AuthContextProvider(props) {
     const logout = () => {
 
         setAuthState(null);
-        localStorage.clear();
-
+        sessionStorage.clear();
     }
 
     const contexData = {

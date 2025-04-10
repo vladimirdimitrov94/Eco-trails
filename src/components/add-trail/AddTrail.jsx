@@ -9,9 +9,7 @@ const initialValues = {
     location: '',
     length: '',
     difficulty: '',
-    details: '',
-    likes: []
-
+    details: ''
 }
 
 export default function AddTail() {

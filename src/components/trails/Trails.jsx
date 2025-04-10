@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import Paginator from '../paginator/Pagiantor'
-import { useGetAllTrails } from "../../hooks/useTrails";
+import { usePaginatedTrails } from "../../hooks/useTrails";
+import { useState } from "react";
 
 
 
 export default function Trails() {
 
-    const [trails] = useGetAllTrails();
+    const [pageIndex, setPageIndex] = useState(0);
+    const { trails, totalCount } = usePaginatedTrails(pageIndex);
 
     return (
         <div className="bg-white">
@@ -24,7 +26,12 @@ export default function Trails() {
                         </Link>
                     ))}
                 </div>
-                <Paginator />
+                <Paginator
+                    pageIndex={pageIndex}
+                    setPageIndex={setPageIndex}
+                    pageSize={8}
+                    totalCount={totalCount}
+                />
             </div>
         </div>
     )

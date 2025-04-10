@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import { useGetUserTrails } from "../../hooks/useTrails";
+import { usePaginatedMyTrails } from "../../hooks/useTrails";
 import { getUserProfile } from "../../utils/authUtils";
 
 import Paginator from '../paginator/Pagiantor'
+import { useState } from "react";
 
 
 export default function MyTrails() {
@@ -10,9 +11,9 @@ export default function MyTrails() {
     const authData = getUserProfile();
     const userId = authData._id
 
-    const [trails] = useGetUserTrails(userId);
+    const [pageIndex, setPageIndex] = useState(0);
+    const { trails, totalCount } = usePaginatedMyTrails(pageIndex, userId);
 
-    
     return (
         <div className="bg-white">
             <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-6 lg:max-w-6xl lg:px-8">
@@ -29,7 +30,12 @@ export default function MyTrails() {
                         </Link>
                     ))}
                 </div>
-                <Paginator />
+                <Paginator
+                    pageIndex={pageIndex}
+                    setPageIndex={setPageIndex}
+                    pageSize={8}
+                    totalCount={totalCount}
+                />
             </div>
         </div>
     )

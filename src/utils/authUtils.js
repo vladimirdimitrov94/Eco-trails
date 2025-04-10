@@ -1,5 +1,5 @@
 export const getAccessToken = () => {
-    const authJSON = localStorage.getItem('auth');
+    const authJSON = sessionStorage.getItem('auth');
 
     if (!authJSON) {
         return '';
@@ -11,7 +11,7 @@ export const getAccessToken = () => {
 }
 
 export const getUserProfile = () => {
-    const authJSON = localStorage.getItem('auth');
+    const authJSON = sessionStorage.getItem('auth');
 
     if (!authJSON) {
         return '';

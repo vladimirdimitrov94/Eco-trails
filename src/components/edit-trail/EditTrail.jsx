@@ -15,7 +15,7 @@ const initialValues = {
 export default function EditTrail() {
 
     const { trailId } = useParams();
-    const [trail, setTrail] = useGetOneTrail(trailId)
+    const [trail] = useGetOneTrail(trailId)
     const navigate = useNavigate();
 
     const { changeHandler, submitHandler, values } = useForm(Object.assign(initialValues, trail), (values) => {
